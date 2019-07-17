@@ -8,10 +8,10 @@ const catchE = require("./error");
 
 //COLLECTIONS
 const customerOrders = module.context.collection("customer_orders");
-router.tag("customer");
+router.tag("order");
 //Recieves customer_id and cart_obj (including store_id of product) from the frontend. Sends this info to customer_orders collection
 router
-  .post("/order/:customer_id", function(req, res) {
+  .post("customer/:customer_id", function(req, res) {
     try {
       console.debug(req.body);
       let customer_id = req.pathParams.customer_id;
