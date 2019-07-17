@@ -1,0 +1,8 @@
+{
+  "name": "EMOCK",
+  "description": "PLEASE IGNORE THIS SERVICE",
+
+  "engines": { "arangodb": "^3.0.0" },
+  "main": "main.js",
+  "scripts": { "setup": "scripts/setup.js", "teardown": "scripts/teardown.js" }
+}
