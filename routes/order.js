@@ -9,6 +9,7 @@ const catchE = require("./error");
 
 //COLLECTIONS
 const customerOrders = module.context.collection("customer_orders");
+
 router.tag("order");
 //Recieves customer_id and cart_obj (including store_id of product) from the frontend. Sends this info to customer_orders collection
 router
@@ -59,7 +60,7 @@ router
   .description("This endpoint sends an order to the store")
   .pathParam("customer_id", joi.string().required(), "customer id (key)");
 
-//Fetches checked-out orders that need to be "accepted" by the store
+//Fetches pending orders
 
 router
   .get("/vendor_pending", (req, res) => {
@@ -83,12 +84,12 @@ router
       catchE(res, e);
     }
   })
-  .summary("fetches orders to be accepted by the store")
+  .summary("fetches pending orders")
   .description(
     "This endpoint fetches orders from etest_customer_orders collection to be accepted by the store"
   );
 
-//recieves order_id  from front-end, then updates the order (status_received: true)
+//recieves order_id  from frontend, then updates the order (status_received: true)
 router
   .patch("/status_recieved/:order_id", function(req, res) {
     try {
