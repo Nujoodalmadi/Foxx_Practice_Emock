@@ -1,12 +1,33 @@
 "use strict";
-
+const _ = require("lodash");
 const joi = require("joi");
 
-exports.Model = {
-  _key: joi.string().optional(),
-  _id: joi.string().optional(),
-  _rev: joi.string().optional(),
-  completed: joi.boolean().optional(),
-  order: joi.number().optional(),
-  title: joi.string().optional()
+let customerOrder = {
+  schema: {
+    order_id: joi
+      .number()
+      .integer()
+      .required(),
+    customer_id: joi
+      .number()
+      .integer()
+      .required(),
+    driver_id: joi
+      .number()
+      .integer()
+      .optional(),
+    status: joi.array().required(),
+    order_total: joi.number().required(),
+    order_tax: joi.number().optional(),
+    cart_obj: joi.array().items(
+      joi.object().keys({
+        product: joi.string().required(),
+        quantity: joi
+          .number()
+          .integer()
+          .required()
+      })
+    )
+  }
 };
+module.exports = customerOrder;
