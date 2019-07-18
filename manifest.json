@@ -4,5 +4,13 @@
 
   "engines": { "arangodb": "^3.0.0" },
   "main": "main.js",
-  "scripts": { "setup": "scripts/setup.js", "teardown": "scripts/teardown.js" }
+  "scripts": { "setup": "scripts/setup.js", "teardown": "scripts/teardown.js" },
+  "configuration": {
+    "message": {
+      "description": "A message to demonstrate hot Foxx configuration works",
+      "default": "Hey there!",
+      "type": "string",
+      "required": true
+    }
+  }
 }

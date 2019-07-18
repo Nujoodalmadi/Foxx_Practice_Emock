@@ -90,6 +90,7 @@ router
   );
 
 //recieves order_id  from frontend, then updates the order (status_received: true)
+//MODIFY: send to driver
 router
   .patch("/status_recieved/:order_id", function(req, res) {
     try {

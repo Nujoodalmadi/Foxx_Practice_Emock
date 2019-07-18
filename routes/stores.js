@@ -20,6 +20,8 @@ router
           return _.omit(store, ["_key", "_id", "_rev"]);
         })
       );
+      const message = module.context.configuration.message;
+      console.log(message);
     } catch (e) {
       catchE(res, e);
     }
@@ -30,6 +32,7 @@ router
   );
 
 //Returns branches of a particular store
+// MODIFY: only branches needed by logged in user (vendor) (fronend?)
 router
   .get("/:store_id", function(req, res) {
     try {
