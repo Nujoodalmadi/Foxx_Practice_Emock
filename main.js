@@ -9,3 +9,6 @@ module.context.use("/order", order);
 
 const rating = require("./routes/rating");
 module.context.use("/customer", rating);
+
+const vendorSpecific = require("./routes/vendorSpicific");
+module.context.use(vendorSpecific);
