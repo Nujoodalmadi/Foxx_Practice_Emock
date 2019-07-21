@@ -80,7 +80,7 @@ router
     if (!valid) res.throw("unauthorized");
     req.session.uid = user._key; // The session middleware  (in main.js) adds session and sessionStorage properties to the request object
     req.sessionStorage.save(req.session);
-    res.send({ sucess: true });
+    res.send({ success: true });
   })
   .body(
     joi
@@ -119,7 +119,8 @@ router
         username: joi.string().required(),
         password: joi.string().required(),
         email: joi.string().email({ minDomainSegments: 2 }),
-        phone_number: joi.number().required()
+        phone_number: joi.number().required(),
+        store_id: joi.number().required()
       })
       .required(),
     "Credentials"
@@ -136,14 +137,16 @@ router
   })
   .description("Logs the current user out.");
 
-// router
-//   .get("/verifyLogin", function(req, res) {
-//     try {
-//       const user = customers.document(req.session.uid); //req.session.uid = customer_id
-//       res.send({ username: user.username });
-//     } catch (e) {
-//       res.send({ username: null });
-//     }
-//   })
-//   .description("Returns the currently active username.");
+router
+  .get("/verifyLogin", function(req, res) {
+    try {
+      let user = vendors.document(req.session.uid); //req.session.uid = customer_id; //req.session.uid = customer_id
+      res.send({ username: user.username });
+
+      res.send({ username: user.username });
+    } catch (e) {
+      res.send({ username: null });
+    }
+  })
+  .description("Returns the currently active username.");
 module.exports = router;
