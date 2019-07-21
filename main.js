@@ -12,3 +12,11 @@ module.context.use("/customer", rating);
 
 const vendorSpecific = require("./routes/vendorSpicific");
 module.context.use(vendorSpecific);
+
+//MIDDLEWARE
+const sessions = require("./util/sessions");
+module.context.use(sessions);
+
+//Auth Routes
+const customerAuth = require("./routes/auth");
+module.context.use(customerAuth);
