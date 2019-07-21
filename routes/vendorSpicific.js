@@ -15,7 +15,7 @@ const storesColl = module.context.collection("stores");
 
 router.tag("vendor");
 
-//Posts new branch to an existing store
+//Posts a branch to an existing store
 // MODIFY (permission => only vendor can add a new branch)
 router
   .patch(":store_id/newBranch", (req, res) => {

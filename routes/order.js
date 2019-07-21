@@ -6,6 +6,8 @@ const createRouter = require("@arangodb/foxx/router");
 const router = createRouter();
 const joi = require("joi");
 const catchE = require("./error");
+
+//MODELS
 const orderModel = require("../models/order");
 
 //COLLECTIONS

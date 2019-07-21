@@ -7,7 +7,7 @@
   "scripts": { "setup": "scripts/setup.js", "teardown": "scripts/teardown.js" },
   "configuration": {
     "message": {
-      "description": "A message to demonstrate hot Foxx configuration works",
+      "description": "A message to demonstrate how Foxx configuration works",
       "default": "Hey there!",
       "type": "string",
       "required": true

@@ -6,9 +6,11 @@ const documentCollections = [
   "customer_rating",
   "driver",
   "products",
-  "stores"
+  "stores",
+  "sessions",
+  "usergroups"
 ];
-const edgeCollections = [];
+const edgeCollections = ["hasPerm", "memberOf"];
 
 for (const localName of documentCollections) {
   const qualifiedName = module.context.collectionName(localName);
@@ -23,3 +25,10 @@ for (const localName of edgeCollections) {
     db._createEdgeCollection(qualifiedName);
   }
 }
+
+const users = module.context.collection("customer");
+users.ensureIndex({
+  type: "hash",
+  fields: ["username"],
+  unique: true
+});
