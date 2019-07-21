@@ -4,7 +4,9 @@ const router = createRouter();
 const _ = require("lodash");
 const joi = require("joi");
 const db = require("@arangodb").db;
-const catchE = require("./error");
+const catchE = require("../util/error");
+const restrict = require("../util/restrict");
+const hasPerm = require("../util/hasPerm");
 
 //MODELS
 const storeModels = require("../models/store");
@@ -12,6 +14,7 @@ const branchModel = storeModels.branch;
 
 //COLLECTIONS
 const storesColl = module.context.collection("stores");
+const perms = module.context.collection("hasPerm");
 
 router.tag("vendor");
 

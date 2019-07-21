@@ -4,7 +4,7 @@ const router = createRouter();
 const _ = require("lodash");
 const joi = require("joi");
 const db = require("@arangodb").db;
-const catchE = require("./error");
+const catchE = require("../util/error");
 
 //COLLECTIONS
 const storesCollection = module.context.collection("stores");
