@@ -23,11 +23,15 @@ router.tag("vendor");
 router
   .patch(":store_id/newBranch", (req, res) => {
     try {
-      const store = storesColl.document(req.pathParams.store_id);
-      const newBranchesList = _.concat(store.store_branches, req.body);
-      store.store_branches = newBranchesList;
-      const updatedStore = stores.update(req.pathParams.store_id, store);
-      res.send(updatedStore);
+      if (req.user.store_id === req.pathParams.store_id) {
+        const store = storesColl.document(req.pathParams.store_id);
+        const newBranchesList = _.concat(store.store_branches, req.body);
+        store.store_branches = newBranchesList;
+        const updatedStore = storesColl.update(req.pathParams.store_id, store);
+        res.send(updatedStore);
+      } else {
+        res.send({ success: false });
+      }
     } catch (e) {
       catchE(res, e);
     }
