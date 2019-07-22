@@ -3,8 +3,9 @@ const createRouter = require("@arangodb/foxx/router");
 const router = createRouter();
 const _ = require("lodash");
 const joi = require("joi");
-const db = require("@arangodb").db;
-const catchE = require("../util/error");
+
+const { db, aql } = require("@arangodb");
+const catchE = require("./error");
 const restrict = require("../util/restrict");
 const hasPerm = require("../util/hasPerm");
 
@@ -42,4 +43,44 @@ router
     "adds a new branch to etest_stores collection, store_branches list "
   );
 
+/*****************************************************************************************************************/
+
+router
+  .post("/new-product", (req, res) => {
+    try {
+      const data = req.body;
+      const meta = productsColl.save(req.body);
+    } catch (e) {
+      catchE(res, e);
+    }
+  })
+  .body(productModel.schema)
+  .summary("add a new product")
+  .description("add a new product to etest_products collection");
+
+/*************************************************************************************************************/
+
+router
+  .patch("/update/:productId", (req, res) => {
+    const productId = req.pathParam.productId;
+    const newData = productModel.schema;
+    try {
+      const query = aql`FOR p IN ${productsColl}
+      FILTER p.product_id == ${productId}
+      UPDATE p WITH ${newData} IN ${productsColl}
+      RETURN p`;
+      let qResult = db._query({
+        query: query,
+        cache: true /* cache attribute set here */
+      });
+      res.status(200);
+      res.setHeader("Content-Type", "application/json");
+      res.send(qResult);
+    } catch (e) {
+      catchE(res, e);
+    }
+  })
+  .body(productModel.schema)
+  .summary("edit a product")
+  .description("edit a product in etest_products collection");
 module.exports = router;
