@@ -19,7 +19,6 @@ const perms = module.context.collection("hasPerm");
 router.tag("vendor");
 
 //Posts a branch to an existing store
-// MODIFY (permission => only vendor can add a new branch)
 router
   .patch(":store_id/newBranch", (req, res) => {
     try {
