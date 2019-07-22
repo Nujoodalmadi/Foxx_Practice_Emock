@@ -142,11 +142,9 @@ router
     try {
       let user = vendors.document(req.session.uid); //req.session.uid = customer_id; //req.session.uid = customer_id
       res.send({ username: user.username });
-
-      res.send({ username: user.username });
     } catch (e) {
       res.send({ username: null });
     }
   })
-  .description("Returns the currently active username.");
+  .description("Returns currently active username.");
 module.exports = router;
