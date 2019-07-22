@@ -38,31 +38,6 @@ router
     "adds a new branch to etest_stores collection, store_branches list "
   );
 
-//Deletes a branch
-// MODIFY ( permission => only vendor can delete a branch)
-router
-  .delete(":store_id/:branch_id/deleteBranch", (req, res) => {
-    try {
-      const store = storesColl.document(req.pathParams.store_id);
-      const branchesList = store.store_branches;
-      _.remove(
-        branchesList,
-        branchesList.find(
-          branch => branch.branch_id === req.pathParams.branch_id
-        )
-      );
-      const updateBranch = stores.update(req.pathParams.store_id, store);
-      res.send(updateBranch);
-    } catch (e) {
-      catchE(res, e);
-    }
-  })
-  .pathParam("store_id", joi.string().required(), "id of the store")
-  .pathParam("branch_id", joi.string().required(), "id of the branch")
-  .summary("deletes a branch")
-  .description(
-    "deletes a branch from etest_stores collection, store_branches list "
-  );
 
 module.exports = router;
 
